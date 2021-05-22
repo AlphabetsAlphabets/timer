@@ -1,0 +1,11 @@
+[package]
+name = "timer"
+version = "0.1.0"
+authors = ["Yap Jia Hong <yapjiahong2003@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+crossterm = "0.19.0"
+terminal_size = "0.1.17"
