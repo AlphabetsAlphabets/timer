@@ -96,10 +96,6 @@ fn main() {
         let display = format!("{}\n", message);
         let display_length = display.len() as u16 / 2;
 
-        let hours = time.0;
-        let minutes = time.1;
-        let seconds = time.2;
-
         let time_left = format!("{}s", finish);
         let left_length = time_left.len() as u16 / 2;
 
