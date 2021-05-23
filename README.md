@@ -15,7 +15,7 @@ sudo mv target/release/timer /usr/local/bin
 # Usage
 `timer <message> <time>`  
 `message`: A string, used to display a simple message.  
-`time`: How long you want the timer to go for. It's in seconds.
-
+`time`: How long you want the timer to go for. `hours:minutes:seconds`. 
+Separate it with with colons.
 
 
