@@ -1,5 +1,6 @@
-use std::io::stdout;
 use std::env;
+use std::fmt;
+use std::io::stdout;
 
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
@@ -30,30 +31,44 @@ fn detect() -> Option<bool> {
     }
 }
 
-struct TimeDisplay(String);
+struct Time(usize, usize, usize);
 
-// TODO: Parse time into 01h05m03s etc
-impl From<String> for TimeDisplay {
-    fn from(_time: String) -> Self {
-        TimeDisplay("hi".to_string())
+impl From<String> for Time {
+    fn from(s: String) -> Self {
+        let s = s.split(':');
+        let s: Vec<usize> = s.rev().take(3).map(|x| x.parse().unwrap_or(0)).collect();
+
+        Time(
+            *s.get(2).unwrap_or(&0),
+            *s.get(1).unwrap_or(&0),
+            *s.get(0).unwrap_or(&0),
+        )
+    }
+}
+
+impl fmt::Display for Time {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "{}h{}m{}s\nIf it's all 0's separate it by hours:minute:seconds",
+            self.0, self.1, self.2
+        )
     }
 }
 
 fn main() {
     // in seconds
     let args: Vec<String> = env::args().collect();
-    let message = &args[1];
+    let message = args[1].to_owned();
+
+    let time = args[2].to_owned();
+    let mut time = Time::from(time);
+    let mut finish = time.0 * 3600 + time.1 * 60 + time.0;
 
     enable_raw_mode().unwrap();
     execute!(stdout(), cursor::Hide, EnterAlternateScreen).unwrap();
 
-    // TODO: Make this more reactive
-    // 5m => 05:00
-    // 5m3s => 05:03
-    // 1h5m3s = > 01:05:03
-    let mut finish = args[2].parse::<u64>().unwrap();
     let exit = Arc::new(AtomicBool::new(false));
-
     let exit_signal = exit.clone();
     spawn(move || {
         while !exit_signal.load(Ordering::SeqCst) {
@@ -81,7 +96,11 @@ fn main() {
         let display = format!("{}\n", message);
         let display_length = display.len() as u16 / 2;
 
-        let time_left = format!("{}s\n", finish);
+        let hours = time.0;
+        let minutes = time.1;
+        let seconds = time.2;
+
+        let time_left = format!("{}s", finish);
         let left_length = time_left.len() as u16 / 2;
 
         let help = "Press 'q' to quit.\n".to_string();
@@ -94,7 +113,7 @@ fn main() {
             cursor::MoveTo(w - left_length, h),
             Print(time_left),
             cursor::MoveTo(w - display_length, h - 5),
-            Print(message),
+            Print(display),
             cursor::MoveTo(w - help_length, h + 3),
             Print(help)
         )
@@ -102,7 +121,7 @@ fn main() {
 
         let current = SystemTime::now();
         sleep(Duration::from_secs(1));
-        let elapsed = current.elapsed().unwrap().as_secs();
+        let elapsed = current.elapsed().unwrap().as_secs() as usize;
         finish -= elapsed;
     }
     execute!(stdout(), LeaveAlternateScreen, cursor::Show).unwrap();
