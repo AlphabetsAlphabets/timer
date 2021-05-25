@@ -1,5 +1,5 @@
 # Timer
-It's a timer. It's nice and simple.
+It's a timer. It's nice and simple.  
 <img src="https://media.giphy.com/media/3XV4H8N5vVSHO6fEit/giphy.gif" width="300">
 
 # Installation
