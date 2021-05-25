@@ -31,6 +31,8 @@ fn detect() -> Option<bool> {
     }
 }
 
+// TODO: implement formatting.
+// https://www.codevscolor.com/c-program-convert-seconds-hour-minute-seconds
 struct Time(usize, usize, usize);
 
 impl From<String> for Time {
@@ -62,7 +64,7 @@ fn main() {
     let message = args[1].to_owned();
 
     let time = args[2].to_owned();
-    let mut time = Time::from(time);
+    let time = Time::from(time);
     let mut finish = time.0 * 3600 + time.1 * 60 + time.0;
 
     enable_raw_mode().unwrap();
@@ -106,10 +108,13 @@ fn main() {
             stdout(),
             Clear(ClearType::All),
             SetColors(Colors::new(Color::Green, Color::Black)),
+            // Moves the display message to the top center if the screen.
             cursor::MoveTo(w - left_length, h),
             Print(time_left),
+            // Moves to center
             cursor::MoveTo(w - display_length, h - 5),
             Print(display),
+            // Moves to bottom center
             cursor::MoveTo(w - help_length, h + 3),
             Print(help)
         )
