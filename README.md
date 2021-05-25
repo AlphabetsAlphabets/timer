@@ -1,6 +1,7 @@
 # Timer
 It's a timer. It's nice and simple.  
-<img src="https://media.giphy.com/media/EIXRXCW9azCxYRV2xS/giphy.gif">
+<img src="https://media.giphy.com/media/EIXRXCW9azCxYRV2xS/giphy.gif">  
+**NOTE**: The background colour shifting is due to my configs. 
 
 # Installation
 The pre-requisite is having rust, and rustup installed. Go lookup how
