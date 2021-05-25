@@ -1,5 +1,6 @@
 # Timer
-It's a timer.
+It's a timer. It's nice and simple.
+<div style='position:relative; padding-bottom:calc(56.25% + 44px)'><iframe src='https://gfycat.com/ifr/OptimalEssentialBlowfish' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
 
 # Installation
 The pre-requisite is having rust, and rustup installed. Go lookup how
