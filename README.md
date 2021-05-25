@@ -1,6 +1,6 @@
 # Timer
 It's a timer. It's nice and simple.  
-<img src="https://media.giphy.com/media/3XV4H8N5vVSHO6fEit/giphy.gif" width="300">
+<img src="https://media.giphy.com/media/3XV4H8N5vVSHO6fEit/giphy.gif">
 
 # Installation
 The pre-requisite is having rust, and rustup installed. Go lookup how
