@@ -7,12 +7,15 @@ It's a timer. It's nice and simple.
 The pre-requisite is having rust, and rustup installed. Go lookup how
 to install it.
 
+If you prefer to build through source:
 ```
 git clone https://github.com/YJH16120/timer
 cd timer
 cargo build --release
 sudo mv target/release/timer /usr/local/bin
 ```
+If you do not want to install rust, and rustup you can download the precompiled
+binary from the [releases](https://github.com/YJH16120/timer/releases/tag/1.0.0) page.
 
 # Usage
 `timer <message> <time>`  

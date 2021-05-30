@@ -31,15 +31,12 @@ fn detect() -> Option<bool> {
     }
 }
 
-// TODO: implement formatting.
-// https://www.codevscolor.com/c-program-convert-seconds-hour-minute-seconds
 struct Time(usize, usize, usize);
 
 impl From<String> for Time {
     fn from(s: String) -> Self {
         let s = s.split(':');
         let s: Vec<usize> = s.rev().take(3).map(|x| x.parse().unwrap_or(0)).collect();
-
         Time(
             *s.get(2).unwrap_or(&0),
             *s.get(1).unwrap_or(&0),
@@ -121,7 +118,7 @@ fn main() {
                 Colors::new(Color::Green, Color::Black)
             } else if total <= original * 5 / 10 {
                 Colors::new(Color::Yellow, Color::Black)
-            } else if total <= original * 7 / 10 {
+            } else if total <= original * 3 / 10 {
                 Colors::new(Color::Red, Color::Black)
             } else {
                 Colors::new(Color::DarkRed, Color::Black)
